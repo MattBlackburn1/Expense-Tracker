@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%block title %}Add Expense · Expense Tracker{% endblock %}
+{%block content%}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Add Expense</h5>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="row g-3">
+                <div class="col-md-3">{{ form.date.label }} {{ form.date(class="form-control") }}</div>
+                <div class="col-md-3">{{ form.amount.label }} {{ form.amount(class="form-control", step="0.01") }}</div>
+                <div class="col-md-3">{{ form.category.label }} {{ form.category(class="form-select") }}</div>
+                <div class="col-md-3">{{ form.note.label }} {{ form.note(class="form-control") }}</div>
+            </div>
+            <div class="row mt-3">
+                <button class="btn btn-primary">{{ form.submit.label.text }}</button>
+                <a href="{{url_for('expenses.index')}}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
