@@ -1,26 +1,37 @@
+<!--
+Expenses list page.
+- Accepts "month" (YYYY-MM) and "cat" query params for filtering.
+- Displays month total and per-category totals for the selected month.
+-->
+
 {% extends "base.html" %}
 {% block title %}Expenses · Expense Tracker{% endblock %}
 {% block content %}
 <div class="card mb-3">
     <div class="card-body">
-        <form class="row g-2" method="get">
+        <form class="row g-2 align-items-end" method="get">
             <div class="col-auto">
                 <label class="col-form-label mb-0 small">Month</label>
                 <input class="form-control" type="month" name="month" value="{{ month }}">
             </div>
+
             <div class="col-auto">
                 <label class="col-form-label mb-0 small">Category</label>
                 <select class="form-select" name="cat">
                     {% for c in categories %}
-                    <option value="{{ c.id }}">{{ "selected" if selected_cat==c else "" }}>{{ c }}</option>
+                    <option value="{{ c }}">{{ "selected" if selected_cat==c else "" }}>{{ c }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-auto align-self-end">
+
+            <div class="col-auto">
                 <button class="btn btn-primary">Filter</button>
             </div>
-            <div class="col ms-auto text-end align-self-end">
-                <span class="badge bg-secondary">Month total: £{{ "%.2f"|format(month_total) }}</span>
+
+            <div class="col ms-auto text-end">
+                <span class="badge bg-secondary">
+                    Month total: £{{ "%.2f"|format(month_total) }}
+                </span>
             </div>
         </form>
     </div>
