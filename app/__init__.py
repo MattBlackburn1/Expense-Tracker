@@ -5,6 +5,8 @@ SQLAlchemy database instance. Registers feature blueprints (expenses, reports)
 and ensures database tables are created on first run.
 """
 
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -19,11 +21,9 @@ def create_app():
         registered. Uses a local SQLite file.
     """
     app = Flask(__name__)
-    app.config.update(
-        SQLALCHEMY_DATABASE_URI="sqlite:///expenses.sqlite3",
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        SECRET_KEY="dev",
-    )
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev")
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///expenses.sqlite3"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
 
