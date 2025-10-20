@@ -49,7 +49,7 @@ Expenses list page.
                         <td class="text-end">£{{ "%.2f" % (e.amount or 0) }}</td>
                         <td>{{ e.note }}</td>
                         <td class="text-end">
-                            <form method="post" action="{{ url_for('expenses.delete', id=e.id) }}">
+                            <form method="post" action="{{ url_for('expenses.delete', expense_id=e.id) }}">
                                 <button class="btn btn-sm btn-outline-danger">Delete</button>
                             </form>
                         </td>

@@ -97,17 +97,15 @@ def add():
     return render_template("expenses/add.html", form=form)
 
 
-@bp.post("/delete/<int:id>")
-def delete(id):
+@bp.post("/delete/<int:expense_id>")
+def delete(expense_id: int):
     """Delete a single expense by primary key.
 
     Args:
-        id: Expense.id to delete.
+        expense_id: Expense.id to delete.
     """
-
-    def delete():
-        e = Expense.query.get_or_404(id)
-        db.session.delete(e)
-        db.session.commit()
-        flash("Deleted", "info")
-        return redirect(url_for("expenses.index"))
+    e = Expense.query.get_or_404(expense_id)
+    db.session.delete(e)
+    db.session.commit()
+    flash("Deleted", "info")
+    return redirect(url_for("expenses.index"))
