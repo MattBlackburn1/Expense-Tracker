@@ -1,3 +1,6 @@
+![CI](https://github.com/MattBlackburn1/Expense-Tracker/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Flask](https://img.shields.io/badge/Flask-3.x-lightgrey)
 # Expense Tracker
 
 A clean, full-stack expense tracking web app built with **Flask**, **SQLite**, and **Bootstrap**.

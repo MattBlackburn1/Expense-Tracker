@@ -1,23 +1,27 @@
 """Expenses feature: list, filter, create, and delete expense records."""
 
-from flask import render_template, request, redirect, url_for, flash
-from sqlalchemy import func, select
 from datetime import date
-from . import bp
+
+from flask import flash, redirect, render_template, request, url_for
+from sqlalchemy import func, select
+
 from .. import db
+from ..forms import CATEGORIES, ExpenseForm
 from ..models import Expense
-from ..forms import ExpenseForm, CATEGORIES
+from . import bp
+
 
 def month_key(dt: date) -> str:
     """Return YYYY-MM string for a given date.
 
-      Args:
-          dt: A date object.
+    Args:
+        dt: A date object.
 
-      Returns:
-          str: Month key in the form 'YYYY-MM'.
-      """
+    Returns:
+        str: Month key in the form 'YYYY-MM'.
+    """
     return f"{dt.month:02d}"
+
 
 @bp.get("/")
 def index():
@@ -43,13 +47,16 @@ def index():
     if q_cat != "All":
         base = base.where(Expense.category == q_cat)
 
-    items = (db.session.execute(base.order_by(Expense.date.desc())).scalars().all())
+    items = db.session.execute(base.order_by(Expense.date.desc())).scalars().all()
 
-    month_total = db.session.execute(
-        select(func.sum(Expense.amount)).where(
-            func.strftime("%Y-%m", Expense.date) == q_month
-        )
-    ).scalar() or 0.0
+    month_total = (
+        db.session.execute(
+            select(func.sum(Expense.amount)).where(
+                func.strftime("%Y-%m", Expense.date) == q_month
+            )
+        ).scalar()
+        or 0.0
+    )
 
     by_cat = db.session.execute(
         select(Expense.category, func.sum(Expense.amount))
@@ -64,8 +71,9 @@ def index():
         month_total=month_total,
         by_cat=by_cat,
         categories=["All"] + CATEGORIES,
-        selected_cat=q_cat
+        selected_cat=q_cat,
     )
+
 
 @bp.route("/add", methods=("GET", "POST"))
 def add():
@@ -86,8 +94,8 @@ def add():
         db.session.commit()
         flash("Expense added", "Success")
         return redirect(url_for("expenses.index"))
-    return render_template(
-        "expenses/add.html", form=form)
+    return render_template("expenses/add.html", form=form)
+
 
 @bp.post("/delete/<int:id>")
 def delete(id):
@@ -96,6 +104,7 @@ def delete(id):
     Args:
         id: Expense.id to delete.
     """
+
     def delete():
         e = Expense.query.get_or_404(id)
         db.session.delete(e)
