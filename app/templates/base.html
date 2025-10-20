@@ -19,7 +19,9 @@ Used by all pages.
             <a class="nav-link text-light" href="{{ url_for('expenses.index') }}">Expenses</a>
             <a class="nav-link text-light" href="{{ url_for('reports.index') }}">Reports</a>
         </div>
-            <a class="bn btn-outline-light btn-sm" href="{{ url_for('expenses.add') }}">Add Expense</a>
+            <a class="btn btn-primary btn-sm ms-3" href="{{ url_for('expenses.add') }}">
+                <i class="bi bi-plus-circle"></i>Add Expense
+            </a>
         </div>
 </nav>
 <main class="container my-4">
