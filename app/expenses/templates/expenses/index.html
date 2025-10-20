@@ -41,23 +41,25 @@ Expenses list page.
     <div class="card-body p-0">
         <table class="table table-striped mb-0">
             <thead><tr><th>Category</th><th class="text_end">Amount</th><th>Note</th><th></th></tr></thead>
-            <tbody>
-            {% for e in items %}
-            <tr>
-                <td>{{ e.date }}</td>
-                <td>{{ e.category }}</td>
-                <td class="text-end">£{{ "%.2f"|format(e.amount) }}</td>
-                <td>{{e.note }}</td>
-                <td class="text-end">
-                    <form method="post" action="{{ url_for('expenses.delete', id-e.id) }}">
-                        <button class="btn btn-outline-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {% else %}
-            <tr><td colspan="5" class="text-centre text-muted">No expenses yet.</td></tr>
-            {% endfor %}
-            </tbody>
+                <tbody>
+                {% for e in items %}
+                    <tr>
+                        <td>{{ e.date }}</td>
+                        <td>{{ e.category }}</td>
+                        <td class="text-end">£{{ "%.2f" % (e.amount or 0) }}</td>
+                        <td>{{ e.note }}</td>
+                        <td class="text-end">
+                            <form method="post" action="{{ url_for('expenses.delete', id=e.id) }}">
+                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No expenses yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
         </table>
     </div>
 </div>
