@@ -28,10 +28,10 @@ A clean, full-stack expense tracking web app built with **Flask**, **SQLite**, a
 ## 📸 Screenshots
 
 ### Expenses Page
-![Expenses Page](screenshots/expenses.png)
+![Expenses Page](static/screenshots/expenses.png)
 
 ### Add Expense Form
-![Add Expense Form](screenshots/add_expense.png)
+![Add Expense Form](static/screenshots/add_expense.png)
 
 ### Reports Overview
-![Reports Overview](screenshots/reports.png)
+![Reports Overview](static/screenshots/reports.png)
