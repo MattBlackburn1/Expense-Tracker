@@ -24,3 +24,14 @@ A clean, full-stack expense tracking web app built with **Flask**, **SQLite**, a
 - SQLAlchemy  
 - WTForms  
 - Bootstrap 5
+
+## 📸 Screenshots
+
+### Expenses Page
+![Expenses Page](screenshots/expenses.png)
+
+### Add Expense Form
+![Add Expense Form](screenshots/add_expense.png)
+
+### Reports Overview
+![Reports Overview](screenshots/reports.png)
